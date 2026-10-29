@@ -12,7 +12,6 @@ U=https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0
 [ -f "$ROOT/models/voices-v1.0.bin" ] || curl -sL -o "$ROOT/models/voices-v1.0.bin" $U/voices-v1.0.bin
 cd "$WK"; ln -sfn "$ROOT/models" models; mkdir -p img audio2 out
 python3 render_imgs.py
-python3 thumb.py "$ROOT/episodes/$EP/meta.json"
 python3 tts_v2.py
 python3 make.py audio
 python3 make.py srt
@@ -24,7 +23,9 @@ RANGES=$(python3 -c "import json;print(json.dumps(json.load(open('$ROOT/episodes
 HOOK=$(python3 -c "import json;print(json.load(open('$ROOT/episodes/$EP/meta.json'))['short']['hook'])")
 python3 short.py "$RANGES" "$HOOK"; mv out/short_v1.mp4 out/short.mp4
 cp out/kestrel_ridge.en.srt out/long.en.srt
-[ -f "$ROOT/episodes/$EP/thumbnail.jpg" ] && cp "$ROOT/episodes/$EP/thumbnail.jpg" out/thumbnail.jpg || true
+N=$(echo "$EP" | sed -E 's/^ep0*([0-9]+).*/\1/'); STYLE=$([ $((N % 2)) -eq 1 ] && echo rules || echo alone)
+python3 thumb.py "$ROOT/episodes/$EP/meta.json" $STYLE
+echo $STYLE > out/thumb_style.txt
 # QC: duration + black frames
 python3 - <<'PY'
 import subprocess,sys

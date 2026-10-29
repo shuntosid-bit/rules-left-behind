@@ -20,6 +20,7 @@ OUTPUT: JSON only, this schema:
  "premise": "one-sentence summary incl. setting and twist",
  "description": "YouTube description, 2-4 sentences, no spoilers of the twist",
  "tags": ["8-12 tags"],
+ "thumb": {"rules_text": "<=2 words, e.g. 3:07 AM", "line1": "1 word, e.g. SOMEONE", "line2": "1 word, e.g. KNOCKS", "sub": "<=5 words, e.g. 3,000 M UP A MOUNTAIN"},
  "short": {"ranges": [[startSeg,endSeg],[startSeg,endSeg]], "hook": "<=5 words, ALL CAPS", "title": "Shorts title <=80 chars", "description": "1-2 sentences, no twist spoiler"},
  "segments": [ {
    "voice": "N" | "R" | "C",             // C = full-screen title card (no narration)

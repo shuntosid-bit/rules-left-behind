@@ -39,7 +39,7 @@ def write(ep,root,slug):
     specs['end_card']={'kind':'endcard'}
     open(os.path.join(d,'story.py'),'w').write('TITLE='+json.dumps(ep['title'])+'\nS='+json.dumps(S,indent=0).replace('true','True').replace('false','False').replace('null','None')+'\n')
     open(os.path.join(d,'scenes.py'),'w').write('import json, kit\nfrom scenes_ep1_lib import endcard, card\nSPECS=json.loads('+repr(json.dumps(specs))+')\nD={k:(lambda k=k:(endcard() if SPECS[k].get("kind")=="endcard" else kit.render(SPECS[k]))) for k in SPECS}\nRED={k for k,v in SPECS.items() if v.get("tint")=="red"}\n')
-    sh=ep['short']; meta={'title':ep['title'][:100],'description':ep['description']+'\n\nAn original animated survival mystery from Rules Left Behind.','tags':ep['tags'][:15],'premise':ep['premise'],
+    sh=ep['short']; meta={'title':ep['title'][:100],'description':ep['description']+'\n\nAn original animated survival mystery from Rules Left Behind.','tags':ep['tags'][:15],'premise':ep['premise'],'thumb':ep.get('thumb',{}),
           'short':{'ranges':sh['ranges'],'hook':sh.get('hook','')[:40].upper(),'title':(sh.get('title') or ep['title'])[:90]+' #shorts','description':sh.get('description','')+'\nFull story on the channel: Rules Left Behind.\n#shorts #survival #mystery'}}
     json.dump(meta,open(os.path.join(d,'meta.json'),'w'),indent=2)
     return d

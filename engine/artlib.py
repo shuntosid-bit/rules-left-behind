@@ -91,9 +91,9 @@ def figure(x,y,s=1.0,who='you',expr='neutral',look=0,arms=((15,-10),(-15,10)),le
     if hold: o+=hold(hand)
     hx,hy=0+tilt*0.6,-152
     g=f'<g transform="rotate({tilt} 0 -110)">'
-    g+=circ(hx,hy,46,P['skin'],sw=6)
+    g+=f'<circle cx="{hx}" cy="{hy}" r="46" fill="{P["skin"]}" stroke="{P["ch"]}" stroke-width="6"/>'
     if who=='you':
-        g+=f'<path d="M{hx-48},{hy-8} Q{hx-46},{hy-62} {hx},{hy-64} Q{hx+46},{hy-62} {hx+48},{hy-8} Z" fill="{P["beanie"]}" stroke="{P["ch"]}" stroke-width="6"/>'+rect(hx-50,hy-20,100,18,P['yelL'],sw=5)+circ(hx+4,hy-70,12,P['yelL'],sw=5)
+        g+=f'<path d="M{hx-48},{hy-8} Q{hx-46},{hy-62} {hx},{hy-64} Q{hx+46},{hy-62} {hx+48},{hy-8} Z" fill="{P["beanie"]}" stroke="{P["ch"]}" stroke-width="6"/>'+f'<rect x="{hx-50}" y="{hy-20}" width="100" height="18" rx="5" fill="{P["yelL"]}" stroke="{P["ch"]}" stroke-width="5"/><circle cx="{hx+4}" cy="{hy-70}" r="12" fill="{P["yelL"]}" stroke="{P["ch"]}" stroke-width="5"/>'
     if who=='ruth':
         g+=f'<path d="M{hx-52},{hy+30} Q{hx-58},{hy-50} {hx},{hy-52} Q{hx+58},{hy-50} {hx+52},{hy+30} L{hx+38},{hy+30} Q{hx+40},{hy-26} {hx},{hy-30} Q{hx-40},{hy-26} {hx-38},{hy+30} Z" fill="{P["hair"]}" stroke="{P["ch"]}" stroke-width="5"/>'
         g+=f'<circle cx="{hx-17}" cy="{hy-2}" r="14" fill="none" stroke="{P["ch"]}" stroke-width="4"/><circle cx="{hx+17}" cy="{hy-2}" r="14" fill="none" stroke="{P["ch"]}" stroke-width="4"/>'

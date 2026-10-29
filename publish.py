@@ -41,5 +41,7 @@ if __name__=='__main__':
     try:
         y.thumbnails().set(videoId=e['long_video_id'],media_body=MediaFileUpload(f'{out}/thumbnail.jpg')).execute(); print('thumbnail ok')
     except Exception as x: print('thumbnail skipped (channel may need phone verification):',x)
+    try: e['thumb_style']=open(f'{out}/thumb_style.txt').read().strip()
+    except Exception: pass
     s=m['short']; e['short_video_id']=upload(y,f'{out}/short.mp4',s['title'],s['description']+f"\nFull video: https://youtu.be/{e['long_video_id']}",m['tags'],priv,True)
     json.dump(q,open(os.path.join(ROOT,'queue.json'),'w'),indent=2)
